@@ -1,3 +1,4 @@
+import glob
 import json
 import requests
 from django.shortcuts import render
@@ -7,9 +8,13 @@ from django.shortcuts import render, HttpResponse
 
 def index(request):
     from wikifinder.engine.data_loader import DataLoader
-    dl = DataLoader(
-        [
-            "/home/przemek/Dokumenty/agh/semestr-5/mownit2/mownit-lab/lab/lab6/res/enwiki-latest-pages-articles1.xml-p10p30302"])
+    pathss = glob.glob("/home/przemek/Dokumenty/agh/projects/my-finder/myfinder/wikifinder/res/dumps/*xml*")
+    for p in pathss:
+        print(p)
+    from random import shuffle
+
+    print('+++++++++++++++++++++++++++++++')
+    dl = DataLoader(['/home/przemek/Dokumenty/agh/projects/my-finder/myfinder/wikifinder/res/simplewiki/simplewiki-latest-pages-articles-multistream.xml'])
     dl.load_xml_to_queue()
     dl.build_article()
     return HttpResponse('Hello World!')
@@ -43,9 +48,13 @@ def data_load(request):
 
 def profile(request):
     from wikifinder.engine.data_loader import DataLoader
-    dl = DataLoader(
-        ["/home/przemek/Dokumenty/agh/semestr-5/mownit2/mownit-lab/lab/lab6/res/enwiki-latest-pages-articles1.xml-p10p30302"])
+    import glob
+    pathss = glob.glob("/home/przemek/Dokumenty/agh/projects/my-finder/myfinder/wikifinder/res/dumps/*xml*")
+
+    dl = DataLoader( pathss[0])
     dl.load_xml_to_queue()
     dl.build_article()
+    dl = None
+
     return HttpResponse('Hello World!')
 

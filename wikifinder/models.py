@@ -10,8 +10,11 @@ class Article(models.Model):
     id = models.AutoField(primary_key=True)
     name = models.TextField()
     text = models.TextField()
+    processed =models.BooleanField(default=False)
 
 class WikiDump(models.Model):
     name = models.TextField()
     processed = models.BooleanField()
 
+class Words(models.Model):
+    word = models.TextField(unique=True)
