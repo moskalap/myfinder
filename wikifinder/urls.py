@@ -1,4 +1,3 @@
-
 from django.conf.urls import url
 
 from wikifinder import views
