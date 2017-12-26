@@ -2,6 +2,9 @@
 import os
 import sys
 
+
+
+dpr = None
 if __name__ == "__main__":
     os.environ.setdefault("DJANGO_SETTINGS_MODULE", "myfinder.settings")
     try:
@@ -20,3 +23,5 @@ if __name__ == "__main__":
             )
         raise
     execute_from_command_line(sys.argv)
+    from wikifinder.engine.data_processor import DataProcessor
+    dpr = DataProcessor()

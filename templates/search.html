@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="/static/jquery/dist/jquery.js"></script>
+    <script type="text/javascript" src="/static/bootstrap/dist/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="/static/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/bootstrap/dist/css/bootstrap-theme.min.css">
+</head>
+<body>
+<h1 class="text-center"> WikiFinder </h1>
+<div class="col-lg-12">
+    <style>
+        .form-signin {
+            max-width: 550px;
+            padding: 15px;
+            margin: 0 auto;
+        }
+    </style>
+    <div class="container text-center">
+        <form class="form-signin" id="login_form" method="post" action="/wikifinder/search/">
+
+            {% csrf_token %}
+
+            <br>
+            <input type="text" name="query" class="form-control" placeholder="Napisz co chcesz wyszukac" value=""
+                   required autofocus>
+            <br>
+            <button class="btn btn-lg btn-primary btn-block" type="submit">Szukaj</button>
+        </form>
+    </div>
+    <div class="col-lg-12">
+        {% for key in q %}
+            <tr>
+                <h1 class="text-center">{{ q.fir }}</h1>
+
+            </tr>
+        {% endfor %}
+
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover table-striped tablesorter">
+                <thead>
+                <tr>
+                    <th class="header"> Podobienstwo <i class="icon-sort"></i></th>
+                    <th class="header"> Tytul <i class="icon-sort"></i></th>
+                    <th class="header"> Tekst <i class="icon-sort"></i></th>
+                </thead>
+                <tbody>
+
+                {% for key in data %}
+                    <tr>
+                        <td>{{ key.score }}</td>
+                        <td>{{ key.name }}</td>
+                        <td>{{ key.text }}</td>
+                    </tr>
+                {% endfor %}
+
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</body>
+</html>
